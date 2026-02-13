@@ -4,14 +4,15 @@ on:
   release:
     types: [published]
 
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Show workspace contents
-        run: ls -R .
 
       - name: Clean dist folder
         run: rm -rf dist
