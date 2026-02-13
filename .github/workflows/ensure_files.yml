@@ -1,25 +1,36 @@
-name: Ensure Required Files
+name: Publish to PyPI
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
+  release:
+    types: [published]
 
 jobs:
-  check-files:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Ensure required files exist
-        run: |
-          echo "Checking for pyproject.toml..."
-          test -f pyproject.toml || { echo 'Missing pyproject.toml'; exit 1; }
+      - name: Show workspace contents
+        run: ls -R .
 
-          echo "Checking for README.md..."
-          test -f README.md || { echo 'Missing README.md'; exit 1; }
+      - name: Clean dist folder
+        run: rm -rf dist
 
-          echo "Checking for utilyx package folder..."
-          test -d utilyx || { echo 'Missing utilyx/ folder'; exit 1; }
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-          echo "All required files are present."."
+      - name: Install build tools
+        run: pip install build
+
+      - name: Build wheel only
+        run: python -m build --wheel
+
+      - name: Show wheel metadata
+        run: unzip -p dist/*.whl '*.dist-info/METADATA' || echo "No metadata found"
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@v1.8.11
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
