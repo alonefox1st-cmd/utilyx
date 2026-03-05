@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="utilyx",
-    version="1.0.0",
+    version="1.0.1",
     description="A lightweight Python utility module for config loading, writing, and safe exits.",
     author="alonefox",
     author_email="alonefox_1st@hotmail.com",

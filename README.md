@@ -4,13 +4,60 @@ A lightweight Python utility module providing simple helpers for configuration l
 
 ---
 
-## Features
+---
+## Community
+- Pull requests are welcome
+- Please no slurs
+- Please be respectful of others
+- No question is too dumb
+- I will answer pull requests as soon as I can
+- Everyone is welcome, your sexuality/gender/personality will be protected here
 
-- Unified `Print` wrapper for consistent output  
-- Graceful exit helpers (`quit` and `Exit`)  
-- Config loader supporting JSON and INI  
-- Config writer supporting JSON and INI  
-- Clean error messages instead of raw exceptions  
+---
+
+---
+# **updatelog**:
+- errorui function with tons of configuration
+- loadfile function
+- writefile function 
+- deletefile function
+- clearfile function
+- loadfile and writefile has support for most file types
+- bugfixes 
+- added comments at the start of the file
+- clearfile alias
+- deletefile alias
+
+---
+
+---
+
+# examples:
+Print wrapper:
+```python
+import utilyx
+utilyx.Print(str)
+```
+loadfile:
+```python
+from utilyx import loadfile #import the function
+file_content=loadfile("txt", "logs.txt") #you can use text instead of txt
+print(file_content)
+```
+writefile:
+```python
+from utilyx import writefile #works the same as config just supports most text files
+log=writefile(type="log", filename="logs.log")
+```
+suggested way to import utilyx and use:
+```python
+from utilyx import * #imports all modules without requiring utilyx. at the start of calls
+Print(str)
+config=loadconfig("json", "config.json")#to read JSON files
+print(config)
+```
+
+---
 
 ---
 
@@ -18,3 +65,4 @@ A lightweight Python utility module providing simple helpers for configuration l
 
 ```bash
 pip install utilyx
+```
