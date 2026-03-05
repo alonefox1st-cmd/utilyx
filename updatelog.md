@@ -1,6 +1,6 @@
 # FoxDevs UtilyX
 # **updatelog**:
-```jupyter
+```markdown
 - errorui function with tons of configuration
 - loadfile function
 - writefile function 
@@ -10,3 +10,4 @@
 - added comments at the start of the file
 - clearfile alias
 - deletefile alias
+- native_error_ui

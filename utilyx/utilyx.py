@@ -2,6 +2,8 @@ import configparser #imports what's required for config parsers
 import json #imports the dep for loading JSON files
 import os #for file operations such as delete_file
 import tkinter as tk #imports what's required for gui
+import sys
+import PySide6
 #============logic============
 
 def Print(msg): #makes it easy for new devs so it doesn't matter if they forget python is cap sensitive
@@ -33,6 +35,8 @@ def loadconfig(type="json", filename="config.json"): #loads configs
 
     else:
         return f"sorry, we don't support '{type}' yet. please wait till next update."
+def load_config(type="json", filename="config.json"):
+    loadconfig(type, filename)
 
 def writeconfig(type="json", filename="config.json", data=None): #writes configs
     if data is None:
@@ -61,6 +65,8 @@ def writeconfig(type="json", filename="config.json", data=None): #writes configs
 
     else:
         return f"sorry, we don't support '{type}' yet. please wait till next update."
+def write_config(type="json", filename="config.json", data=None):
+    writeconfig(type, filename, data)
 
 #----------------------------------------------------------------------------------------------------------
 #                     end of comments sorry it makes it harder personally for me to code
@@ -105,8 +111,10 @@ def writefile(type="txt", filename="logs.txt", data=None):
                 except Exception as e:
                     print("error writing to file, maybe its binary:")
         except:
-            errorui(message="ERROR code is:80040265(unknown and unreadable file) we cant read this file", error_code="80040265")
+            errorui(message="ERROR code is:80040265(unknown or unreadable file) we cant read this file", error_code="80040265")
             return f"sorry, we don't support '{type}' yet. please wait till next update."
+def write_file(type="txt", filename="logs.txt", data=None):
+    writefile(type, filename, data)
 
 def loadfile(type="txt", filename="logs.txt"):
     if type == "txt":
@@ -134,6 +142,8 @@ def loadfile(type="txt", filename="logs.txt"):
         except exception():
             errorui(message="ERROR code is:80040265(unknown and unreadable file) we cant read this file", error_code="80040265")
             return f"sorry, we don't support '{type}' yet. please wait till next update."
+def load_file(type="txt", filename="logs.txt"):
+    loadfile(type, filename)
 
 def errorui(error_code=1, message="UtilyX_Default", message_font="Arial", message_font_size=12, button_font="Arial", button_font_size=12, button_highlight_background="black", button_highlight_color="green", button_active_background="blue", button_active_foreground="white",button_disabledfg="gray", button_fg="black", button_bg="lightgray", bgcolor="red", fgcolor="black", uiheight_resize=True, uiwidth_resize=True, windowsize="500x300"):
     def on_button_click():
@@ -173,7 +183,35 @@ def errorui(error_code=1, message="UtilyX_Default", message_font="Arial", messag
                    width=15,
                    wraplength=100).place(rely=0.90, relwidth=1, relheight=0.1)
     root.mainloop()
+def error_ui(error_code=1, message="UtilyX_Default", message_font="Arial", message_font_size=12, button_font="Arial", button_font_size=12, button_highlight_background="black", button_highlight_color="green", button_active_background="blue", button_active_foreground="white", button_disabledfg="gray", button_fg="black", button_bg="lightgray", bgcolor="red", fgcolor="black", uiheight_resize=True, uiwidth_resize=True, windowsize="500x300"):
+    errorui(error_code=error_code, message=message, message_font=message_font, message_font_size=message_font_size, button_font=button_font, button_font_size=button_font_size, button_highlight_background=button_highlight_background, button_highlight_color=button_highlight_color, button_active_background=button_active_background, button_active_foreground=button_active_foreground, button_disabledfg=button_disabledfg, button_fg=button_fg, button_bg=button_bg, bgcolor=bgcolor, fgcolor=fgcolor, uiheight_resize=uiheight_resize, uiwidth_resize=uiwidth_resize, windowsize=windowsize)
 
-#===========aliases===========
-deletefile=delete_file()
-clearfile=clear_file()
+def native_error_ui(error_message="UtilyX_Default", error_code=1):
+    if error_message == "UtilyX_Default":
+        error_message = f"Hay, we've ran into a unexpected error ({error_code}), close this window to end the task."
+
+    def on_exit_pressed():
+        raise SystemExit(error_code)
+
+    from PySide6.QtWidgets import QApplication, QWidget, QTextBrowser, QToolButton
+    from PySide6.QtUiTools import QUiLoader
+    from PySide6.QtCore import QFile
+
+    app = QApplication([])
+
+    loader = QUiLoader()
+    file = QFile("error_better.ui")
+    file.open(QFile.ReadOnly)
+    window = loader.load(file)
+    file.close()
+
+    window.setWindowTitle(f"ERROR: {error_code}")
+
+    exit_button = window.findChild(QToolButton, "exit_button")
+    errormsg = window.findChild(QTextBrowser, "error_msg")
+
+    exit_button.clicked.connect(on_exit_pressed)
+    errormsg.setText(error_message)
+
+    window.show()
+    app.exec()
