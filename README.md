@@ -64,6 +64,6 @@ print(config)
 
 ## Installation
 
-```bash
+```pwsh
 pip install utilyx
 ```
