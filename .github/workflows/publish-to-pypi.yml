@@ -21,6 +21,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install build twine
 
+      - name: Debug files
+        run: ls -la && cat pyproject.toml
+
+
       - name: Build distribution
         run: python -m build
 
