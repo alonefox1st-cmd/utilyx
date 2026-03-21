@@ -1,5 +1,10 @@
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "utilyx"
+dynamic = ["version", "description", "readme", "dependencies", "keywords"]
+
 [tool.setuptools.package-data]
 utilyx = ["*.ui"]
