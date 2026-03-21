@@ -28,6 +28,8 @@ A lightweight Python utility module providing simple helpers for configuration l
 - clearfile alias
 - deletefile alias
 - native_error_ui
+- aliases 
+- bug fixes
 
 ---
 
