@@ -11,3 +11,5 @@
 - clearfile alias
 - deletefile alias
 - native_error_ui
+- aliases 
+- bug fixes
