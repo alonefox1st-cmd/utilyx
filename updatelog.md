@@ -11,5 +11,6 @@
 - clearfile alias
 - deletefile alias
 - native_error_ui
+- added button_funtions
 - aliases 
 - bug fixes
