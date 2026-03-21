@@ -1,4 +1,4 @@
-# Utilyx V1.0.1
+# Utilyx V1.0.2beta1
 
 A lightweight Python utility module providing simple helpers for configuration loading, configuration writing, safe exiting, and standardized printing. Designed to be minimal, readable, and easy to drop into any project.
 
@@ -28,6 +28,7 @@ A lightweight Python utility module providing simple helpers for configuration l
 - clearfile alias
 - deletefile alias
 - native_error_ui
+- added button functions 
 - aliases 
 - bug fixes
 
