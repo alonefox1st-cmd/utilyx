@@ -215,6 +215,6 @@ def native_error_ui(error_message="UtilyX_Default", error_code=1):
 
     window.show()
     app.exec()
-def nativeerrorui():
+def nativeerrorui(error_message="UtilyX_Default", error_code=1):
     return native_error_ui(error_message="UtilyX_Default", error_code=1):
         
